@@ -1,0 +1,95 @@
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>COMMUFI $(uptime) / $(session-time-left) &gt; status</title>
+  $(if refresh-timeout)
+  <meta http-equiv="refresh" content="$(refresh-timeout-secs)">
+  $(endif)
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="expires" content="-1">
+
+
+<script language="JavaScript">
+<!--
+$(if advert-pending == 'yes')
+    var popup = '';
+    function focusAdvert() {
+    if (window.focus) popup.focus();
+    }
+  
+    function openAdvert() {
+    popup = open('$(link-advert)', 'hotspot_advert', '');
+    setTimeout("focusAdvert()", 1000);
+    }
+$(endif)
+    function openLogout() {
+    if (window.name != 'hotspot_status') return true;
+      open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=280,height=250');
+    window.close();
+    return false;
+    }
+//-->
+</script>
+
+  <ion-view view-title="CommuFi ">
+    <ion-content>
+        <div class="bar bar-subheader bar-stable static text-center">
+           <i> <strong class="title">Loading ...</strong></i>
+        </div>
+
+    <div class="section">
+
+          <div class="col s12 m4">
+            <div class="card">
+            <center><h4>CommuFi Login</h4></center>
+              <div class="card-content" style="height:170px">
+                <span class="card-title activator grey-text text-darken-4">
+                        <center>
+                  <form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
+  <table cellspacing="0" class="status" style="font-size:12px">
+  <tr><td align="left" class="col s3 m3" style="font-size:14px"><strong>
+$(if login-by == 'trial')
+    Welcome trial user!
+$(elif login-by != 'mac')
+    Welcome $(username)!
+$(endif)
+<div><img src="images/Logo.png" style="width:60px;height:60px">
+    </strong></td></tr>
+  <tr><td class="col s3 m3" style="text-align: center;"></td></tr>
+    <tr><td class="col s3 m3">&nbsp;</td></tr>
+  <tr><td><strong>IP address</strong></td><td>$(ip)</td></tr>
+  <tr><td><strong>bytes up/down</strong></td><td>$(bytes-in-nice) / $(bytes-out-nice)</td></tr>
+$(if session-time-left)
+  <tr><td><strong>connected / left</strong></td><td>$(uptime) / $(session-time-left)</td></tr>
+$(else)
+  <tr><td><strong>connected</strong></td><td>$(uptime)</td></tr>
+$(endif)
+$(if blocked == 'yes')
+  <tr><td><strong>status</strong></td>
+    <td><div style="color: #FF8080">
+      <a href="$(link-advert)" target="hotspot_advert">advertisement</a> required
+    </div></td></tr>
+$(elif refresh-timeout)
+  <tr><td><strong>status refresh</strong></td><td>$(refresh-timeout)</td></tr>
+$(endif)
+    <tr><td class="col s3 m3">&nbsp;</td></tr>
+    <tr>
+      <td class="col s3 m3">
+$(if login-by-mac != 'yes')
+        <!-- user manager link
+        <button onclick="document.location='http://$(hostname)/user?subs='">status</button>
+        <!-- end of user manager link -->
+        <center><button type="submit" value="log off" class="btn btn-lg btn-primary"><i class="fa fa-user"></i> Log off</button></center>
+      <!--  <input  type="submit" value="log off"> -->
+$(endif)
+      </td>
+    </tr>
+  
+  </table>
+  </form>
+             </center> 
+                </span>
+              </div>
+            </div>
+          </div>
+    </div>
+    </ion-content>
+</ion-view>

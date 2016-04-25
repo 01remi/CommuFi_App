@@ -1,0 +1,58 @@
+﻿  <!-- surely managing login -->
+
+  $(if chap-id)
+  <form name="sendin" action="$(link-login-only)" method="post">
+    <input type="hidden" name="username" />
+    <input type="hidden" name="password" />
+    <input type="hidden" name="dst" value="$(link-status)" />
+    <input type="hidden" name="popup" value="false" />
+  </form>
+  
+  <script type="text/javascript" src="js/md5.js"></script>
+  <script type="text/javascript">
+  <!--
+      function doLogin() {
+    document.sendin.username.value = document.login.username.value;
+    document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+    document.sendin.submit();
+    return false;
+      }
+  //-->
+  </script>
+  $(endif)
+  <!-- end of managing login -->
+<ion-view view-title="CommuFi ">
+    <ion-content>
+        <div class="bar bar-subheader bar-stable static text-center">
+           <i> <strong class="title">Breathe the Digital Power.</strong></i>
+        </div>
+
+    <div class="section">
+
+          <div class="col s12 m4">
+            <div class="card">
+            <center><h4>CommuFi Login</h4></center>
+              <div class="card-content" style="height:170px">
+                <span class="card-title activator grey-text text-darken-4">
+             <!--Login section -->     
+  <form class="form-signin " name="login" action="$(link-login-only)" method="post"
+  $(if chap-id) onSubmit="return doLogin()" $(endif)>
+  <input type="hidden" name="dst" value="$(link-status)" />
+  <input type="hidden" name="popup" value="false" />
+        <center>    
+          <input style="width: 80%;border:solid 1px blue" name="username" type="text" value="$(username)" class="form-control" placeholder="Username"><br>
+          <input style="width: 80%;border:solid 1px blue" type="password" name="password" class="form-control" placeholder="Password">
+        </center>
+        <form action="$(link-login)" name="login" onSubmit="return openLogin()">
+           <center><button type="submit" style="margin-top:5%" class="button button-small" ng-click="loading()"><i class="fa fa-user"></i> Sign In</button></center>
+        </form>
+ </form>
+
+  <!--end of login -->
+                </span>
+              </div>
+            </div>
+          </div>
+    </div>
+    </ion-content>
+</ion-view>
